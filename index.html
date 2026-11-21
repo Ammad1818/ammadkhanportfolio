@@ -566,7 +566,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
     <article class="reel-card">
       <div class="vframe">
         <video id="v-boy-and-puppy" preload="metadata" playsinline aria-label="Boy and the Shivering Puppy">
-          <source src="videos/boy-and-puppy.mp4#t=0.5" type="video/mp4"/>
+          <source src="boy-and-puppy.mp4.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Boy and the Shivering Puppy"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
         <div class="verr"></div>
@@ -583,7 +583,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
     <article class="reel-card">
       <div class="vframe">
         <video id="v-lion-in-jungle" preload="metadata" playsinline aria-label="Lion in the Jungle">
-          <source src="videos/lion-in-jungle.mp4#t=0.5" type="video/mp4"/>
+          <source src="lion-in-jungle.mp4.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Lion in the Jungle"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
         <div class="verr"></div>
@@ -600,7 +600,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
     <article class="reel-card">
       <div class="vframe">
         <video id="v-man-and-sports-car" preload="metadata" playsinline aria-label="Man and Sports Car">
-          <source src="videos/man-and-sports-car.mp4#t=0.5" type="video/mp4"/>
+          <source src="man-and-sports-car.mp4.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Man and Sports Car"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
         <div class="verr"></div>
@@ -617,7 +617,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
     <article class="reel-card">
       <div class="vframe">
         <video id="v-tech-commercial" preload="metadata" playsinline aria-label="Tech Commercial">
-          <source src="videos/tech-commercial.mp4#t=0.5" type="video/mp4"/>
+          <source src="tech-commercial.mp4.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Tech Commercial"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
         <div class="verr"></div>
@@ -839,7 +839,7 @@ document.querySelectorAll('.vframe').forEach(frame=>{
     const src=v.querySelector('source');
     const path=(src&&src.getAttribute('src')||'').split('#')[0];
     frame.classList.remove('playing');frame.classList.add('failed');v.controls=false;
-    frame.querySelector('.verr').textContent='Video file not found at "'+path+'". Check that this file exists in the videos folder of the repository.';
+    frame.querySelector('.verr').textContent='Video file not found at "'+path+'". Check that this file exists in the repository.';
   };
   v.addEventListener('error',fail);
   const srcEl=v.querySelector('source');if(srcEl)srcEl.addEventListener('error',fail);
