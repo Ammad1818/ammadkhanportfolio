@@ -196,6 +196,9 @@ h2.section-title em{font-style:normal;color:var(--gold);}
 .vframe.playing .vplay{opacity:0;pointer-events:none;}
 .vdur{position:absolute;right:12px;bottom:12px;z-index:3;font-size:.68rem;letter-spacing:.1em;padding:3px 9px;border-radius:100px;background:rgba(11,11,12,.7);color:var(--cream);pointer-events:none;transition:opacity .3s;}
 .vframe.playing .vdur{opacity:0;}
+.verr{position:absolute;inset:0;z-index:4;display:none;align-items:center;justify-content:center;text-align:center;padding:20px;background:rgba(11,11,12,.92);color:var(--cream);font-size:.85rem;line-height:1.7;}
+.vframe.failed .verr{display:flex;}
+.vframe.failed .vplay,.vframe.failed .vdur{display:none;}
 .reel-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-top:16px;}
 .reel-title{font-family:var(--font-display);font-size:1.5rem;letter-spacing:.04em;font-weight:400;line-height:1.15;margin-bottom:6px;}
 .reel-desc{font-size:.84rem;color:var(--dim);line-height:1.7;}
@@ -566,6 +569,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
           <source src="videos/boy-and-puppy.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Boy and the Shivering Puppy"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
+        <div class="verr"></div>
         <div class="vdur">0:08</div>
       </div>
       <div class="reel-meta">
@@ -582,6 +586,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
           <source src="videos/lion-in-jungle.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Lion in the Jungle"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
+        <div class="verr"></div>
         <div class="vdur">0:10</div>
       </div>
       <div class="reel-meta">
@@ -598,6 +603,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
           <source src="videos/man-and-sports-car.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Man and Sports Car"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
+        <div class="verr"></div>
         <div class="vdur">0:08</div>
       </div>
       <div class="reel-meta">
@@ -614,6 +620,7 @@ body.rtl .contact-link-item:hover{padding-left:0;padding-right:8px;}
           <source src="videos/tech-commercial.mp4#t=0.5" type="video/mp4"/>
         </video>
         <button class="vplay" type="button" aria-label="Play Tech Commercial"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button>
+        <div class="verr"></div>
         <div class="vdur">0:06</div>
       </div>
       <div class="reel-meta">
@@ -828,6 +835,14 @@ document.querySelectorAll('.vframe').forEach(frame=>{
     v.controls=true;
     const p=v.play();if(p&&p.catch)p.catch(()=>{});
   });
+  const fail=()=>{
+    const src=v.querySelector('source');
+    const path=(src&&src.getAttribute('src')||'').split('#')[0];
+    frame.classList.remove('playing');frame.classList.add('failed');v.controls=false;
+    frame.querySelector('.verr').textContent='Video file not found at "'+path+'". Check that this file exists in the videos folder of the repository.';
+  };
+  v.addEventListener('error',fail);
+  const srcEl=v.querySelector('source');if(srcEl)srcEl.addEventListener('error',fail);
   v.addEventListener('play',()=>frame.classList.add('playing'));
   v.addEventListener('ended',()=>{frame.classList.remove('playing');v.controls=false;v.load();});
 });
